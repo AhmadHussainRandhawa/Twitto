@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+env/
+
+# Django stuff:
+db.sqlite3
+*.log
+
+# Static and media generated files
+/static/
+/media/
+
+# IDEs and text editors
+.idea/
+*.swp
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Node.js modules (if using Tailwind or other JS frameworks)
+node_modules/
+
+# Environment variables
+.env
