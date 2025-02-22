@@ -47,5 +47,9 @@
     <div class="container">
         {% block content %}{% endblock %}
     </div>
+  {% if settings.DEBUG %}
+  <script src="http://127.0.0.1:8000/__reload__/reload.js"></script>
+  {% endif %}
+  
 </body>
 </html>
