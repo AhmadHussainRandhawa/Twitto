@@ -1,5 +1,64 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import TweetForm
+from .models import Tweet
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
-# Create your views here.
-def tweet_page(request):
-    return render(request, 'index.html')
+def tweetPage(request):
+    return render(request, 'tweetPage.html')
+
+
+def tweetList(request):
+    tweets = Tweet.objects.all().select_related('user').order_by('-created_at')
+    return render(request, 'tweetList.html', {'tweets': tweets})
+
+
+@login_required
+def tweetCreate(request):
+    if request.method == 'POST':
+        form = TweetForm(request.POST, request.FILES)
+        if form.is_valid():
+            tweet = form.save(commit=False) # form.save() here converts the data into Tweet model object.
+            tweet.user = request.user
+            tweet.save()
+            messages.success(request, "✅ Tweet Created Successfully!")
+            return redirect('tweetList')
+    else:
+        form = TweetForm()
+    
+    return render(request, 'tweetCreate.html', {'form': form})
+
+
+@login_required
+def tweetEdit(request, tweet_id):
+    tweet = get_object_or_404(Tweet, pk=tweet_id, user=request.user)
+
+    if request.method == 'POST':
+        form = TweetForm(request.POST, request.FILES, instance=tweet)
+        if form.is_valid():
+            tweet = form.save(commit=False)
+            tweet.user = request.user
+            tweet.save()
+            messages.success(request, '✅ Tweet Updated Successfully!')
+            return redirect('tweetList')
+    else: 
+        form = TweetForm(instance=tweet)
+
+    return render(request, 'tweetEdit.html', {'form': form})
+
+
+@login_required
+def tweetDelete(request, tweet_id):
+    tweet = get_object_or_404(Tweet, pk=tweet_id)
+    if tweet.user != request.user:
+        return HttpResponseForbidden("⛔ You are not authorized to delete this tweet.")
+
+
+    if request.method == "POST":
+        tweet.delete()
+        messages.success(request, '✅ Tweet Deleted Successfully!')
+        return redirect('tweetList')
+    
+    return render(request, 'tweetConfirmDelete.html', {'tweet': tweet})
+
