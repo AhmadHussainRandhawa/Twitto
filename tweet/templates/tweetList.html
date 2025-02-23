@@ -2,7 +2,7 @@
 {% block title %}Tweeto{% endblock %}
 
 {% block content %}
-<h1 class='text-center mt-4'>Hey! Ahmad watching your Tweets 🧟</h1>
+<h1 class='text-center mt-4'>{{user.username|capfirst}} What's on your mind today?</h1>
 <a class='btn btn-primary mb-3' href="{% url 'tweetCreate' %}">Create Tweet</a>
 
 <div class='container row g-3'>
