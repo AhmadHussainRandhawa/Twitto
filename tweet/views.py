@@ -61,3 +61,7 @@ def tweetDelete(request, tweet_id):
         return redirect('tweetList')
     
     return render(request, 'tweetConfirmDelete.html', {'tweet': tweet})
+
+
+def contact(request):
+    return render(request, 'contact.html')
