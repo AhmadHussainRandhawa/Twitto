@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
-def tweetPage(request):
-    return render(request, 'tweetPage.html')
+# def tweetPage(request):
+#     return render(request, 'tweetPage.html')
 
 
 def tweetList(request):
@@ -27,7 +27,7 @@ def tweetCreate(request):
     else:
         form = TweetForm()
     
-    return render(request, 'tweetCreate.html', {'form': form})
+    return render(request, 'tweetForm.html', {'form': form})
 
 
 @login_required
@@ -45,7 +45,7 @@ def tweetEdit(request, tweet_id):
     else: 
         form = TweetForm(instance=tweet)
 
-    return render(request, 'tweetEdit.html', {'form': form})
+    return render(request, 'tweetForm.html', {'form': form})
 
 
 @login_required
@@ -61,4 +61,3 @@ def tweetDelete(request, tweet_id):
         return redirect('tweetList')
     
     return render(request, 'tweetConfirmDelete.html', {'tweet': tweet})
-

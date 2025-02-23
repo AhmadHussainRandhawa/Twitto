@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Tweeto{% endblock %}
+
+{% block content %}
+<h1 class='text-center mt-4'>Welcome To My Tweet Web</h1>
+<a class='btn btn-primary mb-3' href="{% url 'tweetCreate' %}">Create Tweet</a>
+
+<div class='container row g-3'>
+
+    {% for tweet in tweets %}
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card bg-dark text-light" style="width: 100%;">
+                {% if tweet.image %}
+                    <img src="{{tweet.image.url}}" class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">{{tweet.user.username}}</h4>
+                    <p class="card-text">{{tweet.text}}</p>
+                    <a href="{% url 'tweetEdit' tweet.id %}" class="btn btn-outline-info">Edit</a>
+                    <a href="{% url 'tweetDelete' tweet.id %}" class='btn btn-outline-danger'>Delete</a>
+                </div>
+            </div>    
+        </div> 
+    {% endfor %}
+    
+{% endblock %}
