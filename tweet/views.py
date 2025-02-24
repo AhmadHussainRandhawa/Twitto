@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import TweetForm
+from .forms import TweetForm, UserRegisterationForm
 from .models import Tweet
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
+from django.contrib.auth import login
 
 # def tweetPage(request):
 #     return render(request, 'tweetPage.html')
@@ -65,3 +65,19 @@ def tweetDelete(request, tweet_id):
 
 def contact(request):
     return render(request, 'contact.html')
+
+
+def register(request):
+    if request.method=='POST':
+        form = UserRegisterationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password1'])
+            user.save()
+            login(request, user)
+            return redirect('tweetList')
+
+    else:
+        form = UserRegisterationForm()
+
+    return render(request, 'registration/register.html', {'form': form})
