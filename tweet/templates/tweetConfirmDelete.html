@@ -2,11 +2,14 @@
 {% block title %}Delete{% endblock %}
 
 {% block content %}
-<h1 class='text-white mt-4 mb-4'>You really want to delete your tweet?</h1>
-<form method='POST'>
-    {% csrf_token %}
-    <button class='btn btn-danger'>Delete</button>
-    <a href="{% url 'tweetList' %}" class='btn btn-success'>Cancel</a>
-</form>
-
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="text-center">
+        <h1 class="text-white mb-4">You really want to delete your tweet?</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger me-2">Delete</button>
+            <a href="{% url 'tweetList' %}" class="btn btn-success">Cancel</a>
+        </form>
+    </div>
+</div>
 {% endblock %}

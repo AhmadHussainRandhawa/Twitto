@@ -4,9 +4,7 @@ from .models import Tweet
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-
-# def tweetPage(request):
-#     return render(request, 'tweetPage.html')
+from django.http import HttpResponseForbidden
 
 
 def tweetList(request):
