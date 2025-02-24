@@ -25,7 +25,7 @@ def tweetCreate(request):
             messages.success(request, "✅ Tweet Created Successfully!")
             return redirect('tweetList')
     else:
-        form = TweetForm()
+        form = TweetForm()  # Empty form for GET request.
     
     return render(request, 'tweetForm.html', {'form': form})
 
