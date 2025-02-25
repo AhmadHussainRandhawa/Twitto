@@ -12,7 +12,6 @@ db.sqlite3
 *.log
 
 # Static and media generated files
-/static/
 /media/
 
 # IDEs and text editors
