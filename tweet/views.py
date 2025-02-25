@@ -7,9 +7,15 @@ from django.contrib.auth import login
 from django.http import HttpResponseForbidden
 
 
+
 def tweetList(request):
     tweets = Tweet.objects.all().select_related('user').order_by('-created_at')
-    return render(request, 'tweetList.html', {'tweets': tweets})
+    query = request.GET.get('q', '').strip()
+
+    if query:
+        tweets = tweets.filter(text__icontains=query)  # Fixed typo
+    
+    return render(request, 'tweetList.html', {'tweets': tweets, 'query': query})  # Fixed dictionary
 
 
 @login_required
