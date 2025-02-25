@@ -5,28 +5,51 @@
     <div class="card shadow-lg p-4" style="width: 400px; border-radius: 10px;">
         <h2 class="text-center mb-3">Register</h2>
 
-        {% if form.errors %}
+        {% if form.non_field_errors %}
         <div class="alert alert-danger text-center">
-            Please correct the errors below and try again.
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
         </div>
         {% endif %}
 
         <form method="POST">
             {% csrf_token %}
             
+            <!-- Username Field -->
             <div class="mb-3">
                 <label for="id_username" class="form-label">Username</label>
-                <input type="text" name="username" id="id_username" class="form-control" placeholder="Choose a username">
+                <input type="text" name="username" id="id_username" 
+                    class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
+                    placeholder="Choose a username" value="{{ form.username.value|default:'' }}">
+                
+                {% for error in form.username.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
             </div>
 
+            <!-- Password Field -->
             <div class="mb-3">
                 <label for="id_password1" class="form-label">Password</label>
-                <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Create a password">
+                <input type="password" name="password1" id="id_password1" 
+                    class="form-control {% if form.password1.errors %}is-invalid{% endif %}" 
+                    placeholder="Create a password">
+                
+                {% for error in form.password1.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
             </div>
 
+            <!-- Confirm Password Field -->
             <div class="mb-3">
                 <label for="id_password2" class="form-label">Confirm Password</label>
-                <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm your password">
+                <input type="password" name="password2" id="id_password2" 
+                    class="form-control {% if form.password2.errors %}is-invalid{% endif %}" 
+                    placeholder="Confirm your password">
+                
+                {% for error in form.password2.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
             </div>
 
             <button type="submit" class="btn btn-success w-100">Register</button>
