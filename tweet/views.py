@@ -6,6 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.http import HttpResponseForbidden
 
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
+
 
 
 def tweetList(request):
@@ -67,10 +71,6 @@ def tweetDelete(request, tweet_id):
     return render(request, 'tweetConfirmDelete.html', {'tweet': tweet})
 
 
-def contact(request):
-    return render(request, 'contact.html')
-
-
 def register(request):
     if request.method=='POST':
         form = UserRegisterationForm(request.POST)
@@ -85,3 +85,27 @@ def register(request):
         form = UserRegisterationForm()
 
     return render(request, 'registration/register.html', {'form': form})
+
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Check if all fields are filled
+        if not name or not email or not message:
+            messages.error(request, "All fields are required. Please fill out your name, email, and message.")
+            return render(request, 'contact.html')
+
+        # Send email if all fields are filled
+        subject = f"Message from {name}"
+        message_content = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+        recipient_list = [settings.EMAIL_HOST_USER]  # Your email address
+
+        send_mail(subject, message_content, email, recipient_list)
+
+        messages.success(request, "Message sent successfully!")
+        return render(request, 'contact.html')
+
+    return render(request, 'contact.html')
