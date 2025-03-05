@@ -1,6 +1,6 @@
-# Twitter Clone
+# Twitto
 
-A simple Twitter clone built using Django, allowing users to post tweets with images.
+A simple Twitto app built using Django, allowing users to post tweets with images.
 
 ## Features
 
