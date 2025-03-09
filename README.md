@@ -56,12 +56,11 @@ A simple Twitto app built using Django, allowing users to post tweets with image
 
 ## Reach Me
 
-Feel free to connect with me on LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/yourprofile)
-
+Feel free to connect with me on LinkedIn: [My LinkedIn Profile](https://www.linkedin.com/in/ahmad-hussain-randhawa/) 
 ## Live Demo
 
-Check out the live version here: [Live Demo Link]([https://your-live-demo-url.com](https://ahmadhussain.pythonanywhere.com/twitto/))
+Check out the live version here: [Live Demo](https://ahmadhussain.pythonanywhere.com/twitto/)
 
 ## Demo Video
 
-Watch the demo of the site here: [Demo Video Link](https://your-video-url.com)
+Watch the demo of the site here: [Demo Video](https://your-video-url.com)
