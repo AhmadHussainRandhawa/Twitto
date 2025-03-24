@@ -63,4 +63,4 @@ Check out the live version here: [Live Demo](https://ahmadhussain.pythonanywhere
 
 ## Demo Video
 
-Watch the demo of the site here: [Demo Video](https://your-video-url.com)
+Watch the demo of the site here: [Video Walkthrough](https://www.linkedin.com/posts/ahmad-hussain-randhawa_twitter-is-banned-in-pakistan-no-worries-activity-7305853963977805824-sVpI?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFK_lyIBQ2ZNZsDPfp6CJVVTPrDpzO6jKTw)
